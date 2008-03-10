@@ -1,10 +1,10 @@
 package HTML::Template::Compiled::Plugin::LineBreak;
 
-# $Id: LineBreak.pm 5 2007-07-14 15:28:44Z root $
+# $Id: LineBreak.pm 25 2008-03-10 12:00:34Z hagy $
 
 use strict;
 use warnings;
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 HTML::Template::Compiled->register(__PACKAGE__);
 
@@ -21,6 +21,9 @@ sub register {
 
 sub html_line_break {
     local $_  = shift;
+
+    defined or return;
+
 #   s|(\r?\n)|<br />$1|g;
     s|\x0D\x0A|<br />\r\n|g and return $_;  # for \r\n  CRLF    WIN
     s|\x0D|<br />\r|g       and return $_;  # for \r    CR      MAC
